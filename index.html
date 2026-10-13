@@ -1,0 +1,276 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Northline Dental Studio — Demo Build</title>
+<meta name="description" content="Demo build by Mitarth: conversion-focused site with online booking and automated front-desk workflows.">
+<style>
+  :root{
+    --ink:#0d1b2a; --ink-soft:#41546b; --line:#e3e8ef;
+    --brand:#0f766e; --brand-dark:#0b5a54; --accent:#f59e0b;
+    --bg:#ffffff; --bg-alt:#f7fafc; --radius:14px;
+    --shadow:0 1px 2px rgba(13,27,42,.06),0 12px 32px -12px rgba(13,27,42,.18);
+  }
+  *{box-sizing:border-box}
+  html{scroll-behavior:smooth}
+  body{margin:0;font:16px/1.6 -apple-system,BlinkMacSystemFont,"Segoe UI",Inter,Roboto,sans-serif;color:var(--ink);background:var(--bg)}
+  .wrap{max-width:1120px;margin:0 auto;padding:0 24px}
+  header{position:sticky;top:0;z-index:20;background:rgba(255,255,255,.9);backdrop-filter:blur(12px);border-bottom:1px solid var(--line)}
+  .nav{display:flex;align-items:center;justify-content:space-between;height:72px}
+  .logo{display:flex;align-items:center;gap:10px;font-weight:800;letter-spacing:-.02em;font-size:19px}
+  .logo .mark{width:32px;height:32px;border-radius:9px;background:var(--brand);display:grid;place-items:center;color:#fff;font-size:17px}
+  .nav-links{display:flex;gap:28px;font-size:15px;font-weight:500}
+  .nav-links a{color:var(--ink-soft);text-decoration:none}
+  .nav-links a:hover{color:var(--brand)}
+  .btn{display:inline-flex;align-items:center;gap:8px;padding:12px 20px;border-radius:10px;font-weight:650;font-size:15px;text-decoration:none;border:1px solid transparent;cursor:pointer;transition:.16s}
+  .btn-primary{background:var(--brand);color:#fff;box-shadow:0 8px 20px -8px rgba(15,118,110,.6)}
+  .btn-primary:hover{background:var(--brand-dark);transform:translateY(-1px)}
+  .btn-ghost{background:#fff;color:var(--ink);border-color:var(--line)}
+  .btn-ghost:hover{border-color:var(--brand);color:var(--brand)}
+  .hero{padding:84px 0 72px;background:linear-gradient(180deg,#f7fafc 0%,#fff 100%)}
+  .hero-grid{display:grid;grid-template-columns:1.05fr .95fr;gap:56px;align-items:center}
+  .pill{display:inline-flex;align-items:center;gap:8px;background:#ecfdf5;color:#065f46;border:1px solid #a7f3d0;padding:6px 13px;border-radius:999px;font-size:13px;font-weight:650;margin-bottom:22px}
+  .dot{width:7px;height:7px;border-radius:50%;background:#10b981;animation:pulse 1.8s infinite}
+  @keyframes pulse{0%,100%{opacity:1}50%{opacity:.35}}
+  h1{font-size:clamp(34px,4.6vw,54px);line-height:1.08;letter-spacing:-.03em;margin:0 0 18px}
+  h1 em{font-style:normal;color:var(--brand)}
+  .lede{font-size:18px;color:var(--ink-soft);margin:0 0 30px;max-width:520px}
+  .cta-row{display:flex;gap:12px;flex-wrap:wrap;margin-bottom:26px}
+  .trust{display:flex;gap:22px;flex-wrap:wrap;font-size:13.5px;color:var(--ink-soft)}
+  .trust b{color:var(--ink)}
+  .card-demo{background:#fff;border:1px solid var(--line);border-radius:18px;box-shadow:var(--shadow);overflow:hidden}
+  .card-head{padding:16px 18px;border-bottom:1px solid var(--line);display:flex;align-items:center;justify-content:space-between}
+  .card-head h3{margin:0;font-size:15px;letter-spacing:-.01em}
+  .badge{font-size:11.5px;font-weight:700;text-transform:uppercase;letter-spacing:.06em;color:#065f46;background:#ecfdf5;padding:4px 9px;border-radius:6px}
+  .slot-list{padding:8px}
+  .slot{display:flex;align-items:center;justify-content:space-between;padding:12px 12px;border-radius:10px;font-size:14.5px}
+  .slot:hover{background:var(--bg-alt)}
+  .slot .t{font-weight:650}
+  .slot .s{font-size:12.5px;color:var(--ink-soft)}
+  .slot .go{font-size:12.5px;font-weight:700;color:var(--brand)}
+  .card-foot{padding:14px 18px;background:var(--bg-alt);border-top:1px solid var(--line);font-size:13px;color:var(--ink-soft);display:flex;justify-content:space-between}
+  .section{padding:78px 0}
+  .section.alt{background:var(--bg-alt);border-top:1px solid var(--line);border-bottom:1px solid var(--line)}
+  .eyebrow{font-size:12.5px;font-weight:750;letter-spacing:.1em;text-transform:uppercase;color:var(--brand);margin:0 0 12px}
+  h2{font-size:clamp(26px,3.2vw,38px);letter-spacing:-.025em;line-height:1.15;margin:0 0 14px}
+  .sub{color:var(--ink-soft);font-size:17px;max-width:640px;margin:0 0 44px}
+  .grid3{display:grid;grid-template-columns:repeat(3,1fr);gap:22px}
+  .feature{background:#fff;border:1px solid var(--line);border-radius:var(--radius);padding:26px}
+  .feature .ic{width:42px;height:42px;border-radius:11px;background:#ecfdf5;display:grid;place-items:center;font-size:20px;margin-bottom:16px}
+  .feature h3{margin:0 0 8px;font-size:17px;letter-spacing:-.01em}
+  .feature p{margin:0;color:var(--ink-soft);font-size:14.5px}
+  .flow{display:grid;grid-template-columns:repeat(4,1fr);gap:18px;margin-top:8px}
+  .step{background:#fff;border:1px solid var(--line);border-radius:var(--radius);padding:22px;position:relative}
+  .step .n{width:26px;height:26px;border-radius:50%;background:var(--ink);color:#fff;display:grid;place-items:center;font-size:13px;font-weight:700;margin-bottom:14px}
+  .step h4{margin:0 0 6px;font-size:15px}
+  .step p{margin:0;font-size:13.5px;color:var(--ink-soft)}
+  .price-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:22px;align-items:start}
+  .plan{background:#fff;border:1px solid var(--line);border-radius:16px;padding:28px;display:flex;flex-direction:column;height:100%}
+  .plan.featured{border:2px solid var(--brand);box-shadow:var(--shadow);position:relative}
+  .plan.featured::after{content:"MOST CHOSEN";position:absolute;top:-11px;left:50%;transform:translateX(-50%);background:var(--brand);color:#fff;font-size:11px;font-weight:750;letter-spacing:.08em;padding:4px 11px;border-radius:999px}
+  .plan h3{margin:0 0 6px;font-size:16px}
+  .plan .amt{font-size:38px;font-weight:800;letter-spacing:-.03em;margin:6px 0 2px}
+  .plan .amt span{font-size:15px;font-weight:600;color:var(--ink-soft)}
+  .plan .note{font-size:13px;color:var(--ink-soft);margin:0 0 20px}
+  .plan ul{list-style:none;padding:0;margin:0 0 24px;display:grid;gap:11px;font-size:14.5px}
+  .plan li{display:flex;gap:10px;align-items:flex-start}
+  .plan li::before{content:"✓";color:var(--brand);font-weight:800;flex:none}
+  .plan .btn{margin-top:auto;justify-content:center}
+  .proof{display:grid;grid-template-columns:repeat(3,1fr);gap:22px}
+  .metric{background:#fff;border:1px solid var(--line);border-radius:var(--radius);padding:26px;text-align:center}
+  .metric .big{font-size:34px;font-weight:800;letter-spacing:-.03em;color:var(--brand)}
+  .metric p{margin:6px 0 0;font-size:14px;color:var(--ink-soft)}
+  .faq{display:grid;gap:12px;max-width:800px}
+  details{background:#fff;border:1px solid var(--line);border-radius:12px;padding:18px 20px}
+  summary{cursor:pointer;font-weight:650;font-size:15.5px}
+  details p{margin:12px 0 0;color:var(--ink-soft);font-size:14.5px}
+  .band{background:var(--ink);color:#fff;padding:64px 0;text-align:center}
+  .band h2{color:#fff;margin-bottom:12px}
+  .band p{color:#b6c2d1;margin:0 auto 30px;max-width:520px}
+  .band .btn-primary{background:var(--accent);color:#3b2600;box-shadow:none}
+  .band .btn-primary:hover{background:#e08e06}
+  footer{padding:40px 0;border-top:1px solid var(--line);font-size:13.5px;color:var(--ink-soft)}
+  .foot{display:flex;justify-content:space-between;gap:20px;flex-wrap:wrap}
+  @media(max-width:900px){
+    .hero-grid,.grid3,.flow,.price-grid,.proof{grid-template-columns:1fr}
+    .nav-links{display:none}
+    .hero{padding:56px 0}
+  }
+</style>
+</head>
+<body>
+
+<header>
+  <div class="wrap nav">
+    <div class="logo"><span class="mark">N</span> Northline Dental Studio</div>
+    <nav class="nav-links">
+      <a href="#services">Services</a>
+      <a href="#how">How it works</a>
+      <a href="#pricing">Pricing</a>
+      <a href="#faq">FAQ</a>
+    </nav>
+    <a class="btn btn-primary" href="#book">Book online</a>
+  </div>
+</header>
+
+<section class="hero">
+  <div class="wrap hero-grid">
+    <div>
+      <span class="pill"><span class="dot"></span> Open today · 3 same-day slots left</span>
+      <h1>Same-day dental care, <em>booked in 30 seconds</em>.</h1>
+      <p class="lede">No phone tag. No waiting on hold. Pick a time, get a confirmation, walk in. Emergency slots open every morning at 7am.</p>
+      <div class="cta-row">
+        <a class="btn btn-primary" href="#book">Book an appointment →</a>
+        <a class="btn btn-ghost" href="#how">See how it works</a>
+      </div>
+      <div class="trust">
+        <span>⭐ <b>4.9</b> · 812 reviews</span>
+        <span>🏥 <b>Insurance</b> accepted</span>
+        <span>⏱ <b>&lt;2 min</b> avg. reply</span>
+      </div>
+    </div>
+
+    <div class="card-demo" id="book">
+      <div class="card-head">
+        <h3>Available this week</h3>
+        <span class="badge">Live</span>
+      </div>
+      <div class="slot-list">
+        <div class="slot"><div><div class="t">Today · 3:40 PM</div><div class="s">Cleaning &amp; check-up · 45 min</div></div><span class="go">Reserve →</span></div>
+        <div class="slot"><div><div class="t">Today · 5:10 PM</div><div class="s">Emergency visit · 30 min</div></div><span class="go">Reserve →</span></div>
+        <div class="slot"><div><div class="t">Tomorrow · 9:00 AM</div><div class="s">Whitening consult · 30 min</div></div><span class="go">Reserve →</span></div>
+        <div class="slot"><div><div class="t">Tomorrow · 11:30 AM</div><div class="s">New patient exam · 60 min</div></div><span class="go">Reserve →</span></div>
+      </div>
+      <div class="card-foot">
+        <span>Confirmation by SMS + email</span>
+        <span>Free cancellation</span>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="section" id="services">
+  <div class="wrap">
+    <p class="eyebrow">What we do</p>
+    <h2>Everything your smile needs, under one roof.</h2>
+    <p class="sub">General, cosmetic and emergency dentistry with transparent pricing quoted before you sit down.</p>
+    <div class="grid3">
+      <div class="feature"><div class="ic">🦷</div><h3>General &amp; preventive</h3><p>Cleanings, exams, fillings and sealants. Reminders go out automatically so nobody misses a six-month recall.</p></div>
+      <div class="feature"><div class="ic">✨</div><h3>Cosmetic</h3><p>Whitening, veneers and aligners — with a digital preview of your result before you commit.</p></div>
+      <div class="feature"><div class="ic">🚑</div><h3>Emergency care</h3><p>Chipped tooth at 8pm? Our after-hours form triages you and books the first open slot automatically.</p></div>
+      <div class="feature"><div class="ic">💳</div><h3>Insurance handled</h3><p>We verify coverage before your visit and tell you the exact out-of-pocket number up front.</p></div>
+      <div class="feature"><div class="ic">🧒</div><h3>Family &amp; pediatric</h3><p>Gentle care for kids, with parent-friendly scheduling around school hours.</p></div>
+      <div class="feature"><div class="ic">📱</div><h3>Telehealth follow-ups</h3><p>Post-op questions answered by video instead of a second trip across town.</p></div>
+    </div>
+  </div>
+</section>
+
+<section class="section alt" id="how">
+  <div class="wrap">
+    <p class="eyebrow">The part most clinics get wrong</p>
+    <h2>From missed call to confirmed patient — automatically.</h2>
+    <p class="sub">Every step below runs without anyone touching a keyboard. This is the workflow layer that sits behind the website.</p>
+    <div class="flow">
+      <div class="step"><div class="n">1</div><h4>Inquiry arrives</h4><p>Website form, missed call, Google profile or DM — all funnel into one inbox.</p></div>
+      <div class="step"><div class="n">2</div><h4>Instant reply</h4><p>Auto-response in under 60 seconds with booking link. 78% of patients book with whoever answers first.</p></div>
+      <div class="step"><div class="n">3</div><h4>Slot + intake</h4><p>Calendar updates live, intake form and insurance details collected before arrival.</p></div>
+      <div class="step"><div class="n">4</div><h4>Reminders + recall</h4><p>SMS reminders cut no-shows, and the six-month recall list runs itself.</p></div>
+    </div>
+  </div>
+</section>
+
+<section class="section">
+  <div class="wrap">
+    <p class="eyebrow">Results</p>
+    <h2>What this setup typically changes.</h2>
+    <p class="sub">Illustrative figures from the workflow pattern this demo is built on — not a promise of your numbers.</p>
+    <div class="proof">
+      <div class="metric"><div class="big">−64%</div><p>Front-desk time on scheduling and reminders</p></div>
+      <div class="metric"><div class="big">&lt;60s</div><p>Response time to a new patient inquiry, 24/7</p></div>
+      <div class="metric"><div class="big">3.2×</div><p>More after-hours bookings captured instead of lost</p></div>
+    </div>
+  </div>
+</section>
+
+<section class="section alt" id="pricing">
+  <div class="wrap">
+    <p class="eyebrow">Build packages</p>
+    <h2>Pick the level of done-for-you.</h2>
+    <p class="sub">One-time build, then optional monthly automation management. No lock-in on the retainer.</p>
+    <div class="price-grid">
+      <div class="plan">
+        <h3>Starter</h3>
+        <div class="amt">$1,450<span> one-time</span></div>
+        <p class="note">For clinics that just need to stop losing calls.</p>
+        <ul>
+          <li>5-page conversion site</li>
+          <li>Online booking + SMS reminders</li>
+          <li>Mobile-first, loads under 2s</li>
+          <li>Google Business Profile setup</li>
+          <li>2 rounds of revisions</li>
+        </ul>
+        <a class="btn btn-ghost" href="#book">Start here</a>
+      </div>
+      <div class="plan featured">
+        <h3>Growth</h3>
+        <div class="amt">$2,900<span> one-time</span></div>
+        <p class="note">Site plus the full automation layer. Most clinics choose this.</p>
+        <ul>
+          <li>Everything in Starter</li>
+          <li>Unified inbox (calls, forms, DMs)</li>
+          <li>Automated intake + insurance capture</li>
+          <li>Recall &amp; review-request sequences</li>
+          <li>Staff handover training + Loom library</li>
+          <li>90 days of post-launch support</li>
+        </ul>
+        <a class="btn btn-primary" href="#book">Book a walkthrough</a>
+      </div>
+      <div class="plan">
+        <h3>Practice</h3>
+        <div class="amt">$5,400<span> one-time</span></div>
+        <p class="note">Multi-location or multi-provider operations.</p>
+        <ul>
+          <li>Everything in Growth</li>
+          <li>Up to 5 location pages</li>
+          <li>Per-provider booking + profiles</li>
+          <li>Custom reporting dashboard</li>
+          <li>Priority support, 12 months</li>
+        </ul>
+        <a class="btn btn-ghost" href="#book">Request a scope</a>
+      </div>
+    </div>
+    <p class="sub" style="margin-top:26px;font-size:14.5px">Automation management from $295/month, cancellable any time. Hosting, monitoring and monthly tweaks included.</p>
+  </div>
+</section>
+
+<section class="section" id="faq">
+  <div class="wrap">
+    <p class="eyebrow">Questions</p>
+    <h2>Before you book.</h2>
+    <div class="faq">
+      <details open><summary>Do you take my insurance?</summary><p>Yes — we verify coverage before your appointment and show you the exact out-of-pocket cost. No surprise bills.</p></details>
+      <details><summary>What if I have a dental emergency?</summary><p>Use the emergency form any time. It triages severity and books the earliest available slot, including same-day openings held back each morning.</p></details>
+      <details><summary>Can I reschedule without calling?</summary><p>Yes. Every confirmation SMS and email has a reschedule link that updates the calendar instantly.</p></details>
+      <details><summary>How fast will someone get back to me?</summary><p>New inquiries get an automatic response in under a minute, and a human reply within two business hours.</p></details>
+    </div>
+  </div>
+</section>
+
+<section class="band">
+  <div class="wrap">
+    <h2>Your next appointment is 30 seconds away.</h2>
+    <p>Pick a time, get confirmed, show up. That's the whole process.</p>
+    <a class="btn btn-primary" href="#book">Book an appointment →</a>
+  </div>
+</section>
+
+<footer>
+  <div class="wrap foot">
+    <div><strong>Northline Dental Studio</strong> — demo build. Fictional practice for portfolio purposes.</div>
+    <div>Demo site · built by Mitarth · 2026</div>
+  </div>
+</footer>
+
+</body>
+</html>
